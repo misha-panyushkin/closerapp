@@ -1,0 +1,48 @@
+{
+  "name": "closer",
+  "version": "0.0.1",
+  "description": "Closer app.",
+  "repository": "https://github.com/misha-panyushkin/closer.app",
+  "main": "public/dynamic/app.js",
+
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "compression": "*",
+
+    "flux": "*",
+    "keymirror": "*",
+    "object-assign": "*",
+    "lodash": "*",
+    "react": "*",
+
+    "browserify": "*",
+    "envify": "*",
+    "reactify": "*",
+    "uglify-js": "*"
+  },
+
+  "devDependencies": {
+    "jest-cli": "*",
+    "watchify": "*"
+  },
+
+  "scripts": {
+    "start": "watchify -o public/dynamic/bundle.js -v -d public/dynamic/app.js -t [envify --NODE_ENV development] | forever app.js",
+    "build": "browserify public/dynamic/app.js > public/dynamic/bundle.js  -t [envify --NODE_ENV development] | uglifyjs -cm > public/dynamic/bundle.min.js | forever app.js",
+    "test": "jest"
+  },
+
+  "author": "Misha Panyushkin",
+
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+
+  "jest": {
+    "rootDir": "./dynamic"
+  }
+}

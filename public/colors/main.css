@@ -1,0 +1,30 @@
+body {
+	margin: 0;
+}
+
+.app-box {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+}
+
+.app-toolbar {
+	background-color: #579EE3;
+	color: #fff;
+	position: relative;
+  	z-index: 100;
+}
+
+.app-toolbar .toolbar-tools {
+	height: 40px;
+}
+
+.app-send-box {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	padding: 0 0 4px 4px;
+	color: #4059a9;
+	z-index: 1;
+}
