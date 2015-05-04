@@ -16,7 +16,7 @@ function HTTPActions () {};
 
 	this.receiveMessage = function (data) {
 		dispatcher.dispatch({
-			type: types.CREATE_MESSAGE,
+			type: types.RECEIVE_MESSAGE,
 			message: data
 		});
 	};

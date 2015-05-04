@@ -29,8 +29,8 @@ function HTTP () {}
 		return netRequests.correspondence('GET', {
 			uid: current_uid
 		}).then(function (data, text_status, event) {
-			httpActions.receiveCorrespondence(data);
-			return $.Deferred().resolve(data);
+			httpActions.receiveCorrespondence(data.correspondence);
+			return $.Deferred().resolve(data.correspondence);
 		}).fail(function (event) {});
 	};
 
@@ -39,8 +39,8 @@ function HTTP () {}
 			uid: current_uid,
 			text: text
 		})).then(function (data, text_status, event) {
-			httpActions.receiveMessage(data);
-			return $.Deferred().resolve(data);
+			httpActions.receiveMessage(data.message);
+			return $.Deferred().resolve(data.message);
 		}).fail(function (event) {});
 	};
 

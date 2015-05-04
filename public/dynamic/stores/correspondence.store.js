@@ -11,7 +11,7 @@ var _correspondence = {
 	messages: []
 };
 
-var CorrespondenceStore = assign({}, EventEmitter.protottype, {
+var CorrespondenceStore = assign({}, EventEmitter.prototype, {
 
 	emitChange: function () {
 		this.emit(CHANGE_EVENT);
@@ -25,7 +25,7 @@ var CorrespondenceStore = assign({}, EventEmitter.protottype, {
 		this.removeListener(CHANGE_EVENT, handler);
 	},
 
-	getMessages: function () {
+	getAllMessages: function () {
 		return _correspondence.messages;
 	}
 });
@@ -47,10 +47,20 @@ CorrespondenceStore.dispatchToken = dispatcher.register(function (action) {
 });
 
 function _updateMessage (message) {
+	if (_correspondence.messages.length === 0) {
+		_correspondence.messages.push(message);
+		CorrespondenceStore.emitChange();
+		return;
+	}
+
 	_.find(_correspondence.messages, function (current, index, list) {
 		var predicate = current.id === message.id;
 		if (predicate) {
 			list.splice(index, 1, message);
+			CorrespondenceStore.emitChange();
+
+		} else if (list.length-1 === index) {
+			list.push(message);
 			CorrespondenceStore.emitChange();
 		}
 		return predicate;
